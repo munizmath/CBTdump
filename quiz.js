@@ -13,6 +13,8 @@ document.addEventListener('DOMContentLoaded', function () {
     let passingPercentage = 75;
     const totalQuestions = 150;
     let selectedParts = [];
+    let remainingTime = 0;  // Em segundos
+    let timerInterval = null;
 
     fetch('questions.json')
         .then(response => response.json())
@@ -136,12 +138,28 @@ document.addEventListener('DOMContentLoaded', function () {
             selectedParts.pop();  // Remova a última parte selecionada
             return;
         }
-    
+        // Inicie o temporizador quando uma parte for selecionada
+        remainingTime += 30 * 60;  // Adicione 30 minutos ao tempo restante
+        if (timerInterval === null) {
+            timerInterval = setInterval(updateTimer, 1000);
+        }
         // Atualize o quiz com as questões das partes selecionadas
         updateQuiz();
     }
     
-    
+   function updateTimer() {
+    const minutes = Math.floor(remainingTime / 60);
+    const seconds = remainingTime % 60;
+    document.getElementById('timer').textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+    if (remainingTime <= 0) {
+        clearInterval(timerInterval);
+        alert("O tempo acabou!");
+        // Aqui você pode adicionar o código para finalizar o quiz
+    } else {
+        remainingTime--;
+    }
+} 
     
 
     function updateQuiz() {
