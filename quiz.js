@@ -202,10 +202,15 @@ document.addEventListener('DOMContentLoaded', function () {
         incorrectCount = 0;
         correctCounter.textContent = correctCount;
         incorrectCounter.textContent = incorrectCount;
+        // Resetar o temporizador
+        remainingTime = 0;
+        clearInterval(timerInterval);
+        timerInterval = null;
+        document.getElementById('timer').textContent = "00:00";
         buildQuiz(currentQuestions);
         updateStatusMessage();
     }
-    
+
     window.resetParts = resetParts;
 
 });
