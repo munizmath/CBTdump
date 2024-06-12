@@ -12,97 +12,145 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentQuestions = [];
     let passingPercentage = 75;
     const totalQuestions = 150;
+    let selectedParts = [];
 
     fetch('questions.json')
         .then(response => response.json())
         .then(data => {
             allQuestions = data.questions;
-            buildQuiz(allQuestions.slice(0, 25)); // Show first part by default
-            currentQuestions = allQuestions.slice(0, 25);
+           // selectPart(1); // Show first part by default
             updateStatusMessage();
         });
 
-    function buildQuiz(questions) {
-        const output = [];
-        correctCount = 0;
-        incorrectCount = 0;
-        correctCounter.textContent = correctCount;
-        incorrectCounter.textContent = incorrectCount;
-
-        questions.forEach((currentQuestion, questionNumber) => {
-            const answers = [];
-            for (let letter in currentQuestion.options) {
-                answers.push(
-                    `<label class="answer">
-                        <input type="radio" name="question${questionNumber}" value="${letter}">
-                        ${letter} :
-                        ${currentQuestion.options[letter]}
-                    </label>`
-                );
-            }
-            output.push(
-                `<div class="question"> 
-                    <h3>${currentQuestion.id}. ${currentQuestion.question}</h3> 
-                </div>
-                <div class="answers"> ${answers.join('<br>')} </div>`
-            );
-        });
-
-        quizContainer.innerHTML = output.join('');
-
-        // Add event listeners to check answers immediately after selection
-        questions.forEach((currentQuestion, questionNumber) => {
-            const answerContainer = quizContainer.querySelector(`.answers:nth-child(${questionNumber * 2 + 2})`);
-            let attempts = 0;
-            let answeredCorrectly = false;
-
-            answerContainer.addEventListener('change', function(event) {
-                if (answeredCorrectly) return;
-
-                const selectedOption = event.target.value;
-                const allInputs = answerContainer.querySelectorAll('input');
-                
-                if (selectedOption === currentQuestion.correctAnswer) {
-                    correctCount++;
-                    correctCounter.textContent = correctCount;
-                    answerContainer.style.color = 'green';
-                    answeredCorrectly = true;
-                    allInputs.forEach(input => input.disabled = true);
-                } else {
-                    attempts++;
-                    if (attempts >= 3) {
-                        incorrectCount++;
-                        incorrectCounter.textContent = incorrectCount;
-                        answerContainer.style.color = 'red';
-                        allInputs.forEach(input => input.disabled = true);
-                        const correctLabel = answerContainer.querySelector(`input[value=${currentQuestion.correctAnswer}]`).parentElement;
-                        correctLabel.style.backgroundColor = 'yellow';
-                    } else {
-                        event.target.disabled = true;
-                    }
+        function buildQuiz(questions) {
+            // Se não houver perguntas, retorne imediatamente
+    if (questions.length === 0) {
+        quizContainer.innerHTML = '';
+        return;
+    }
+            const output = [];
+            correctCount = 0;
+            incorrectCount = 0;
+            correctCounter.textContent = correctCount;
+            incorrectCounter.textContent = incorrectCount;
+    
+            questions.forEach((currentQuestion, questionNumber) => {
+                const answers = [];
+                for (let letter in currentQuestion.options) {
+                    answers.push(
+                        `<label class="answer">
+                            <input type="radio" name="question${questionNumber}" value="${letter}">
+                            ${letter} :
+                            ${currentQuestion.options[letter]}
+                        </label>`
+                    );
                 }
-                updateStatusMessage();
+                output.push(
+                    `<div class="question"> 
+                        <h3>${currentQuestion.id}. ${currentQuestion.question}</h3> 
+                    </div>
+                    <div class="answers"> ${answers.join('<br>')} </div>`
+                );
             });
-        });
-    }
-
-    function updateStatusMessage() {
-        const totalQuestionsInCurrentPart = currentQuestions.length;
-        const requiredCorrectAnswers = Math.ceil((passingPercentage / 100) * totalQuestionsInCurrentPart);
-        const remainingCorrectAnswers = requiredCorrectAnswers - correctCount;
-
-        if (remainingCorrectAnswers > 0) {
-            statusMessage.textContent = `Você precisa acertar mais ${remainingCorrectAnswers} questões para atingir ${passingPercentage}% de acerto.`;
-        } else {
-            statusMessage.textContent = `Parabéns! Você atingiu ${passingPercentage}% de acerto.`;
+    
+            quizContainer.innerHTML = output.join('');
+    
+            // Add event listeners to check answers immediately after selection
+            questions.forEach((currentQuestion, questionNumber) => {
+                const answerContainer = quizContainer.querySelector(`.answers:nth-child(${questionNumber * 2 + 2})`);
+                let attempts = 0;
+                let answeredCorrectly = false;
+    
+                answerContainer.addEventListener('change', function(event) {
+                    if (answeredCorrectly) return;
+    
+                    const selectedOption = event.target.value;
+                    const allInputs = answerContainer.querySelectorAll('input');
+                    
+                    if (selectedOption === currentQuestion.correctAnswer) {
+                        correctCount++;
+                        correctCounter.textContent = correctCount;
+                        answerContainer.style.color = 'green';
+                        answeredCorrectly = true;
+                        allInputs.forEach(input => input.disabled = true);
+                    } else {
+                        attempts++;
+                        if (attempts >= 3) {
+                            incorrectCount++;
+                            incorrectCounter.textContent = incorrectCount;
+                            answerContainer.style.color = 'red';
+                            allInputs.forEach(input => input.disabled = true);
+                            const correctLabel = answerContainer.querySelector(`input[value=${currentQuestion.correctAnswer}]`).parentElement;
+                            correctLabel.style.backgroundColor = 'yellow';
+                        } else {
+                            event.target.disabled = true;
+                        }
+                    }
+                    updateStatusMessage();
+                });
+            });
         }
-    }
+
+        function updateStatusMessage() {
+            if (currentQuestions.length === 0) {
+                statusMessage.textContent = "Selecione os quizes para começar";
+            } else {
+                const totalQuestionsInCurrentPart = currentQuestions.length;
+                const requiredCorrectAnswers = Math.ceil((passingPercentage / 100) * totalQuestionsInCurrentPart);
+                const remainingCorrectAnswers = requiredCorrectAnswers - correctCount;
+        
+                if (remainingCorrectAnswers > 0) {
+                    if (correctCount + incorrectCount === totalQuestionsInCurrentPart) {
+                        statusMessage.textContent = "Você já respondeu todas as perguntas. Por favor, reinicie o quiz.";
+                    } else {
+                        statusMessage.textContent = `Você precisa acertar mais ${remainingCorrectAnswers} questões para atingir ${passingPercentage}% de acerto.`;
+                    }
+                } else {
+                    statusMessage.textContent = `Parabéns! Você atingiu ${passingPercentage}% de acerto.`;
+                }
+            }
+        }
+        
 
     function selectPart(partNumber) {
-        const start = (partNumber - 1) * 25;
-        const end = start + 25;
-        passingPercentage = 75;
-        currentQuestions = allQuestions.slice(start, end);
+        // Se já selecionou 3 partes, não permita mais seleções
+        if (selectedParts.length >= 3) {
+            alert("Você já selecionou 3 partes.");
+            return;
+        }
+    
+        // Adicione a parte selecionada à lista de partes selecionadas
+        selectedParts.push(partNumber);
+    
+        // Verifique as combinações de partes que são permitidas
+        const tempParts = [...selectedParts];
+        tempParts.sort();
+        const allowedCombinations = ["1,2,3", "1,2,4", "1,2,5", "1,2,6", "1,3,4", "2,3,4", "2,5,6", "3,4,5", "3,4,6", "4,5,6", "1,5,6"];
+        const isAllowed = allowedCombinations.some(combination => {
+            const [a, b, c] = combination.split(',');
+            return (tempParts.includes(parseInt(a)) && tempParts.includes(parseInt(b)) && tempParts.includes(parseInt(c)));
+        });
+    
+        if (!isAllowed && tempParts.length === 3) {
+            alert("Esta combinação de partes não é permitida.");
+            selectedParts.pop();  // Remova a última parte selecionada
+            return;
+        }
+    
+        // Atualize o quiz com as questões das partes selecionadas
+        updateQuiz();
+    }
+    
+    
+    
+
+    function updateQuiz() {
+        currentQuestions = [];
+        selectedParts.forEach(partNumber => {
+            const start = (partNumber - 1) * 25;
+            const end = start + 25;
+            currentQuestions = currentQuestions.concat(allQuestions.slice(start, end));
+        });
         buildQuiz(currentQuestions);
         updateStatusMessage();
     }
@@ -128,4 +176,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     window.selectPart = selectPart;
     window.selectAllParts = selectAllParts;
+
+    function resetParts() {
+        selectedParts = [];
+        currentQuestions = [];
+        correctCount = 0;
+        incorrectCount = 0;
+        correctCounter.textContent = correctCount;
+        incorrectCounter.textContent = incorrectCount;
+        buildQuiz(currentQuestions);
+        updateStatusMessage();
+    }
+    
+    window.resetParts = resetParts;
+
 });
+

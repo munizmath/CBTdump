@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz</title>
+    <title>Quiz do COBIT 5</title>
     <style>
         body {
             margin: 0;
@@ -26,10 +26,16 @@
             margin-top: 70px; /* Adjust for the height of the floating controls */
             padding: 20px;
         }
-        .answer {
-            display: block;
-            margin-bottom: 10px;
+        .question {
+            margin-bottom: 20px; /* Ajusta o espaço entre as questões */
         }
+        .answers {
+            margin-top: 10px; /* Ajusta o espaço entre a pergunta e as respostas */
+        }
+        /*.answer {
+            display: block;
+            margin-bottom: 0px;
+        }*/
         .controls-left {
             flex: 1;
         }
@@ -65,6 +71,7 @@
             <button onclick="selectPart(6)">Parte 6</button>
             <button onclick="selectAllParts()">Todos</button>
             <button id="restart">Reiniciar Quiz</button>
+            <button onclick="resetParts()">Reiniciar Partes</button>
         </div>
     </div>
     <div id="quiz" class="quiz-container"></div>
