@@ -12,7 +12,7 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #312e2e; /* Fundo de tela ajustado */
+            background-color: #312e2e;
         }
 
         input[type="radio"], input[type="checkbox"] {
@@ -52,7 +52,7 @@
             margin-left: 20%;
         }
 
-        #countdown {
+        #countdown, #timer {
             text-align: center;
             font-size: 2em;
             margin-bottom: 20px;
@@ -74,8 +74,7 @@
             margin-bottom: 5%;
             overflow-y: auto;
             height: 80%;
-            max-width: 750px; /* Limite de largura para melhorar a legibilidade */
-            margin-right: 20%; /* Ajuste para barra lateral */
+            max-width: 750px;
         }
 
         label.correct {
@@ -140,44 +139,41 @@
         tr:nth-child(even) {
             background-color: #dddddd;
         }
-
     </style>
 </head>
 <body>
     <div id="sidebar">
         <h2>Tempo total:</h2>
-        <div id="countdown">00:00</div>
+        <div id="timer">00:00</div>
         <button id="pause-button">Pausar</button>
         <button id="resume-button" style="display: none;">Retomar</button>
         <table>
             <tr>
                 <td>Certas</td>
-                <td id="correct-number">0</td>
-                <td id="correct-percentage">0%</td>
+                <td id="correct-counter">0</td>
             </tr>
             <tr>
                 <td>Erradas</td>
-                <td id="incorrect-number">0</td>
-                <td id="incorrect-percentage">0%</td>
+                <td id="incorrect-counter">0</td>
             </tr>
         </table>
-        <p id="remaining-questions">Restam _ questões para passar na prova</p>
+        <p id="status-message">Selecione os quizes para começar</p>
         <button id="submit-button">Enviar Respostas</button>
         <div id="group-buttons">
-            <button class="group-button" data-group="0">Grupo 1</button>
-            <button class="group-button" data-group="1">Grupo 2</button>
-            <button class="group-button" data-group="2">Grupo 3</button>
-            <button class="group-button" data-group="3">Grupo 4</button>
-            <button class="group-button" data-group="4">Grupo 5</button>
-            <button class="group-button" data-group="5">Grupo 6</button>
+            <button class="group-button" onclick="selectPart(1)">Grupo 1</button>
+            <button class="group-button" onclick="selectPart(2)">Grupo 2</button>
+            <button class="group-button" onclick="selectPart(3)">Grupo 3</button>
+            <button class="group-button" onclick="selectPart(4)">Grupo 4</button>
+            <button class="group-button" onclick="selectPart(5)">Grupo 5</button>
+            <button class="group-button" onclick="selectPart(6)">Grupo 6</button>
         </div>
-        <button id="restart-button">Reiniciar Quiz</button>
+        <button id="restart-button" onclick="resetParts()">Reiniciar Quiz</button>
         <button id="finish-button">Finalizar Quiz</button>
         <button id="home-button">Voltar à Página Inicial</button>
     </div>
 
     <div id="quiz-box">
-        <div id="quiz-container">
+        <div id="quiz-container" id="quiz">
             <!-- O conteúdo do quiz será gerado dinamicamente aqui -->
         </div>
     </div>
