@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!answerContainer) return;
 
             // Definir limite de tentativas com base no número de respostas corretas
-            let maxAttempts = Array.isArray(currentQuestion.correctAnswer) && currentQuestion.correctAnswer.length === 2 ? 2 : 1;
+            let maxAttempts = Array.isArray(currentQuestion.correctAnswer) ? 2 : 1;
             let attempts = 0;
             let answeredCorrectly = false;
 
