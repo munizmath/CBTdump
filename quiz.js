@@ -29,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const j = Math.floor(Math.random() * (i + 1));
             [array[i], array[j]] = [array[j], array[i]];
         }
+        return array;
     }
 
     function buildQuiz(questions) {
@@ -201,15 +202,14 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         
         // Embaralhar perguntas selecionadas antes de exibir
-        shuffleArray(currentQuestions);
+        currentQuestions = shuffleArray(currentQuestions);
         buildQuiz(currentQuestions);
         updateStatusMessage();
     }
 
     function selectAllParts() {
         passingPercentage = 85;
-        currentQuestions = allQuestions;
-        shuffleArray(currentQuestions);  // Embaralhar todas as perguntas
+        currentQuestions = shuffleArray([...allQuestions]);  // Embaralhar todas as perguntas
         buildQuiz(currentQuestions);
         updateStatusMessage();
     }
