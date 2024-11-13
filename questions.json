@@ -1475,7 +1475,7 @@
             "D": "Amazon Cognito",
             "E": "AWS Lambda"
         },
-        "correctAnswer": "A, E",
+        "correctAnswer": ["A, E"],
         "explanation": "Amazon EC2 e AWS Lambda fornecem recursos de computação, permitindo executar cargas de trabalho na nuvem."
     },
     {
@@ -1536,7 +1536,7 @@
             "D": "A capacidade computacional do banco de dados do RDS pode ser facilmente dimensionada.",
             "E": "Os grupos de segurança do RDS são gerenciados pela AWS."
         },
-        "correctAnswer": "A, D",
+        "correctAnswer": ["A, D"],
         "explanation": "O Amazon RDS fornece backups automatizados e facilita o dimensionamento da capacidade computacional do banco de dados conforme necessário."
     },
     {
@@ -1585,7 +1585,7 @@
             "D": "Redução da carga em servidores web baseados no Amazon EC2",
             "E": "Envio de mensagens de notificação a usuários finais"
         },
-        "correctAnswer": "B, D",
+        "correctAnswer": ["B, D"],
         "explanation": "Os locais de borda são pontos de presença globais da AWS que permitem entregar conteúdo mais próximo dos usuários e reduzir a carga nos servidores de origem."
     },
     {
@@ -1610,7 +1610,7 @@
             "D": "AWS Storage Gateway",
             "E": "Amazon RDS"
         },
-        "correctAnswer": "A, E",
+        "correctAnswer": ["A, E"],
         "explanation": "O Amazon S3 e o Amazon RDS suportam replicação entre regiões, sendo ideais para redundância e recuperação de desastres."
     },
     {
@@ -1671,7 +1671,7 @@
             "D": "Comprem documentos sobre segurança e conformidade da AWS.",
             "E": "Peçam o AWS Snowball Edge."
         },
-        "correctAnswer": "B, C",
+        "correctAnswer": ["B, C"],
         "explanation": "O AWS Marketplace permite que os usuários vendam soluções e comprem software de terceiros que funciona na AWS."
     },
     {
@@ -1696,7 +1696,7 @@
             "D": "Selecionando um parceiro da AWS Partner Network (APN) para auxiliar na migração.",
             "E": "Usando o Amazon Connect para criar uma nova solicitação de proposta (RFP) para assistência especializada na migração para a nuvem AWS."
         },
-        "correctAnswer": "C, D",
+        "correctAnswer": ["C, D"],
         "explanation": "O AWS Professional Services e os parceiros da APN oferecem suporte especializado e prático para ajudar com a migração para a AWS."
     },
     {
@@ -1709,7 +1709,7 @@
             "D": "4 anos",
             "E": "5 anos"
         },
-        "correctAnswer": "B, C",
+        "correctAnswer": ["B, C"],
         "explanation": "As instâncias reservadas do Amazon EC2 podem ser compradas com compromisso de 1 ou 3 anos diretamente da AWS, oferecendo descontos proporcionais ao tempo."
     },
     {
@@ -1770,7 +1770,7 @@
             "D": "Instâncias reservadas para cargas de trabalho sustentadas",
             "E": "Limites de gastos definidos usando o AWS Budgets"
         },
-        "correctAnswer": "A, D",
+        "correctAnswer": ["A, D"],
         "explanation": "Instâncias spot e reservadas são alternativas de baixo custo em comparação com instâncias sob demanda, sendo ideais para economizar em cargas de trabalho específicas."
     },
     {
@@ -1831,7 +1831,7 @@
             "D": "Alternar para instâncias reservadas ou instâncias spot automaticamente, baseado em qual instância é a mais econômica.",
             "E": "Mover os dados armazenados no Amazon S3 para uma classe de armazenamento mais econômica."
         },
-        "correctAnswer": "B, C",
+        "correctAnswer": ["B, C"],
         "explanation": "Com o AWS Billing and Cost Management, é possível visualizar custos por período, serviço e criar orçamentos com alertas automáticos."
     }
 ]
