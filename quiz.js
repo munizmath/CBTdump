@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!answerContainer) return;
 
             // Definir limite de tentativas com base no número de respostas corretas
-            let maxAttempts = Array.isArray(currentQuestion.correctAnswer) ? 2 : 1;
+            let maxAttempts = Array.isArray(currentQuestion.correctAnswer) && currentQuestion.correctAnswer.length === 2 ? 2 : 1;
             let attempts = 0;
             let answeredCorrectly = false;
 
@@ -77,12 +77,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     ) {
                         correctCount++;
                         correctCounter.textContent = correctCount;
-                        selectedLabel.style.backgroundColor = 'green'; // Marca a resposta correta em verde
+                        selectedLabel.style.backgroundColor = 'green';
                         answeredCorrectly = true;
                         inputs.forEach(input => input.disabled = true);
                     } else {
                         attempts++;
-                        selectedLabel.style.backgroundColor = 'red'; // Marca a resposta incorreta em vermelho
+                        selectedLabel.style.backgroundColor = 'red';
                         if (attempts >= maxAttempts) {
                             incorrectCount++;
                             incorrectCounter.textContent = incorrectCount;
