@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>SeuQuiz - Quiz em andamento</title>
     <style>
+        /* Estilos originais do seu código */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -105,7 +106,7 @@
             background-color: #0056b3;
         }
 
-        #submit-button, #pause-button, #restart-button, #finish-button, #home-button {
+        #submit-button, #pause-button, #resume-button, #restart-button, #finish-button, #home-button {
             background-color: #007BFF;
             color: white;
             padding: 10px;
@@ -173,9 +174,12 @@
     </div>
 
     <div id="quiz-box">
-        <div id="quiz-container" id="quiz">
+        <div id="quiz-container">
             <!-- O conteúdo do quiz será gerado dinamicamente aqui -->
         </div>
     </div>
+
+    <!-- Inclui o JavaScript ao final do corpo para garantir que o HTML seja carregado primeiro -->
+    <script src="quiz.js"></script>
 </body>
 </html>
