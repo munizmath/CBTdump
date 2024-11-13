@@ -38,16 +38,15 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        // Inicializar contadores
         correctCount = 0;
         incorrectCount = 0;
         correctCounter.textContent = correctCount;
         incorrectCounter.textContent = incorrectCount;
 
-        const output = questions.map((currentQuestion, questionNumber) => {
+        const shuffledQuestions = shuffleArray([...questions]);
+
+        const output = shuffledQuestions.map((currentQuestion, questionNumber) => {
             const inputType = Array.isArray(currentQuestion.correctAnswer) ? "checkbox" : "radio";
-            
-            // Embaralhar as opções de resposta
             const shuffledOptions = shuffleArray(Object.keys(currentQuestion.options));
 
             const answers = shuffledOptions.map(
@@ -60,16 +59,17 @@ document.addEventListener('DOMContentLoaded', function () {
 
             return `
                 <div class="question">
-                    <h3>${currentQuestion.id}. ${currentQuestion.question}</h3>
+                    <h3>${questionNumber + 1}. ${currentQuestion.question}</h3>
                     <div class="answers">${answers}</div>
+                    <p class="explanation" style="display: none; color: #006400; font-weight: bold;">${currentQuestion.explanation}</p>
                 </div>`;
         });
 
         quizContainer.innerHTML = output.join('');
 
-        // Adicionar event listeners a cada resposta
-        questions.forEach((currentQuestion, questionNumber) => {
+        shuffledQuestions.forEach((currentQuestion, questionNumber) => {
             const answerContainer = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .answers`);
+            const explanationElement = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .explanation`);
             if (!answerContainer) return;
 
             let maxAttempts = Array.isArray(currentQuestion.correctAnswer) ? 2 : 1;
@@ -86,7 +86,6 @@ document.addEventListener('DOMContentLoaded', function () {
                     const selectedLabel = event.target.parentElement;
 
                     if (Array.isArray(currentQuestion.correctAnswer)) {
-                        // Múltiplas respostas corretas
                         if (event.target.checked) {
                             selectedAnswers.add(selectedOption);
                         } else {
@@ -104,6 +103,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     label.style.backgroundColor = 'green';
                                 });
                                 answeredCorrectly = true;
+                                explanationElement.style.display = 'block';
                             } else {
                                 selectedArray.forEach(ans => {
                                     const label = answerContainer.querySelector(`input[value="${ans}"]`).parentElement;
@@ -112,8 +112,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 incorrectCount++;
                                 incorrectCounter.textContent = incorrectCount;
                                 inputs.forEach(input => input.disabled = true);
+                                explanationElement.style.display = 'block';
 
-                                // Mostrar as respostas corretas em verde
                                 currentQuestion.correctAnswer.forEach(correctOption => {
                                     const correctLabel = answerContainer.querySelector(`input[value="${correctOption}"]`)?.parentElement;
                                     if (correctLabel) correctLabel.style.backgroundColor = 'green';
@@ -121,7 +121,6 @@ document.addEventListener('DOMContentLoaded', function () {
                             }
                         }
                     } else {
-                        // Caso de uma única resposta correta
                         attempts++;
                         if (selectedOption === currentQuestion.correctAnswer) {
                             correctCount++;
@@ -129,13 +128,14 @@ document.addEventListener('DOMContentLoaded', function () {
                             selectedLabel.style.backgroundColor = 'green';
                             answeredCorrectly = true;
                             inputs.forEach(input => input.disabled = true);
+                            explanationElement.style.display = 'block';
                         } else {
                             selectedLabel.style.backgroundColor = 'red';
                             incorrectCount++;
                             incorrectCounter.textContent = incorrectCount;
                             inputs.forEach(input => input.disabled = true);
+                            explanationElement.style.display = 'block';
 
-                            // Mostrar a resposta correta em verde
                             const correctLabel = answerContainer.querySelector(`input[value="${currentQuestion.correctAnswer}"]`)?.parentElement;
                             if (correctLabel) correctLabel.style.backgroundColor = 'green';
                         }
@@ -205,15 +205,13 @@ document.addEventListener('DOMContentLoaded', function () {
             return allQuestions.slice(start, start + 25);
         });
         
-        // Embaralhar perguntas selecionadas antes de exibir
-        currentQuestions = shuffleArray(currentQuestions);
         buildQuiz(currentQuestions);
         updateStatusMessage();
     }
 
     function selectAllParts() {
         passingPercentage = 85;
-        currentQuestions = shuffleArray([...allQuestions]);  // Embaralhar todas as perguntas
+        currentQuestions = shuffleArray([...allQuestions]);
         buildQuiz(currentQuestions);
         updateStatusMessage();
     }
