@@ -33,22 +33,23 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function buildQuiz(questions) {
-        if (questions.length === 0) {
-            quizContainer.innerHTML = '';
-            return;
-        }
+    if (questions.length === 0) {
+        quizContainer.innerHTML = '';
+        return;
+    }
 
-        correctCount = 0;
-        incorrectCount = 0;
-        correctCounter.textContent = correctCount;
-        incorrectCounter.textContent = incorrectCount;
+    correctCount = 0;
+    incorrectCount = 0;
+    correctCounter.textContent = correctCount;
+    incorrectCounter.textContent = incorrectCount;
 
-        const shuffledQuestions = shuffleArray([...questions]);
+    const shuffledQuestions = shuffleArray([...questions]);
 
-        const output = shuffledQuestions.map((currentQuestion, questionNumber) => {
-            const inputType = Array.isArray(currentQuestion.correctAnswer) ? "checkbox" : "radio";
-            const shuffledOptions = shuffleArray(Object.keys(currentQuestion.options));
+    const output = shuffledQuestions.map((currentQuestion, questionNumber) => {
+        const inputType = Array.isArray(currentQuestion.correctAnswer) ? "checkbox" : "radio";
+        const shuffledOptions = shuffleArray(Object.keys(currentQuestion.options));
 
+        // Renderizando as opções de resposta sem exibir as letras de identificação (A, B, C, D)
         const answers = shuffledOptions.map(
             letter => `
                 <label class="answer">
@@ -57,97 +58,94 @@ document.addEventListener('DOMContentLoaded', function () {
                 </label>`
         ).join('');
 
-            return `
-                <div class="question">
-                    <h3>${questionNumber + 1}. ${currentQuestion.question}</h3>
-                    <div class="answers">${answers}</div>
-                    <p class="explanation" style="display: none; color: #006400; font-weight: bold;">${currentQuestion.explanation}</p>
-                </div>`;
-        });
+        return `
+            <div class="question">
+                <h3>${questionNumber + 1}. ${currentQuestion.question}</h3>
+                <div class="answers">${answers}</div>
+                <p class="explanation" style="display: none; color: #006400; font-weight: bold;">${currentQuestion.explanation}</p>
+            </div>`;
+    });
 
-        quizContainer.innerHTML = output.join('');
+    quizContainer.innerHTML = output.join('');
 
-        shuffledQuestions.forEach((currentQuestion, questionNumber) => {
-            const answerContainer = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .answers`);
-            const explanationElement = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .explanation`);
-            if (!answerContainer) return;
+    shuffledQuestions.forEach((currentQuestion, questionNumber) => {
+        const answerContainer = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .answers`);
+        const explanationElement = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .explanation`);
+        if (!answerContainer) return;
 
-            console.log(`Question ${questionNumber + 1}: Loaded explanation: ${currentQuestion.explanation}`); // Verificação
+        let maxAttempts = Array.isArray(currentQuestion.correctAnswer) ? 2 : 1;
+        let attempts = 0;
+        let selectedAnswers = new Set();
+        let answeredCorrectly = false;
 
-            let maxAttempts = Array.isArray(currentQuestion.correctAnswer) ? 2 : 1;
-            let attempts = 0;
-            let selectedAnswers = new Set();
-            let answeredCorrectly = false;
+        const inputs = answerContainer.querySelectorAll(`input[type="${Array.isArray(currentQuestion.correctAnswer) ? "checkbox" : "radio"}"]`);
+        inputs.forEach(input => {
+            input.addEventListener('change', function (event) {
+                if (answeredCorrectly || attempts >= maxAttempts) return;
 
-            const inputs = answerContainer.querySelectorAll(`input[type="${Array.isArray(currentQuestion.correctAnswer) ? "checkbox" : "radio"}"]`);
-            inputs.forEach(input => {
-                input.addEventListener('change', function (event) {
-                    if (answeredCorrectly || attempts >= maxAttempts) return;
+                const selectedOption = event.target.value;
+                const selectedLabel = event.target.parentElement;
 
-                    const selectedOption = event.target.value;
-                    const selectedLabel = event.target.parentElement;
-
-                    if (Array.isArray(currentQuestion.correctAnswer)) {
-                        if (event.target.checked) {
-                            selectedAnswers.add(selectedOption);
-                        } else {
-                            selectedAnswers.delete(selectedOption);
-                        }
-
-                        if (selectedAnswers.size === 2) {
-                            attempts++;
-                            const selectedArray = Array.from(selectedAnswers);
-                            if (selectedArray.every(ans => currentQuestion.correctAnswer.includes(ans))) {
-                                correctCount++;
-                                correctCounter.textContent = correctCount;
-                                selectedArray.forEach(ans => {
-                                    const label = answerContainer.querySelector(`input[value="${ans}"]`).parentElement;
-                                    label.style.backgroundColor = 'green';
-                                });
-                                answeredCorrectly = true;
-                                explanationElement.style.display = 'block'; // Exibir explicação
-                            } else {
-                                selectedArray.forEach(ans => {
-                                    const label = answerContainer.querySelector(`input[value="${ans}"]`).parentElement;
-                                    label.style.backgroundColor = 'red';
-                                });
-                                incorrectCount++;
-                                incorrectCounter.textContent = incorrectCount;
-                                inputs.forEach(input => input.disabled = true);
-                                explanationElement.style.display = 'block'; // Exibir explicação
-
-                                currentQuestion.correctAnswer.forEach(correctOption => {
-                                    const correctLabel = answerContainer.querySelector(`input[value="${correctOption}"]`)?.parentElement;
-                                    if (correctLabel) correctLabel.style.backgroundColor = 'green';
-                                });
-                            }
-                        }
+                if (Array.isArray(currentQuestion.correctAnswer)) {
+                    if (event.target.checked) {
+                        selectedAnswers.add(selectedOption);
                     } else {
+                        selectedAnswers.delete(selectedOption);
+                    }
+
+                    if (selectedAnswers.size === 2) {
                         attempts++;
-                        if (selectedOption === currentQuestion.correctAnswer) {
+                        const selectedArray = Array.from(selectedAnswers);
+                        if (selectedArray.every(ans => currentQuestion.correctAnswer.includes(ans))) {
                             correctCount++;
                             correctCounter.textContent = correctCount;
-                            selectedLabel.style.backgroundColor = 'green';
+                            selectedArray.forEach(ans => {
+                                const label = answerContainer.querySelector(`input[value="${ans}"]`).parentElement;
+                                label.style.backgroundColor = 'green';
+                            });
                             answeredCorrectly = true;
-                            inputs.forEach(input => input.disabled = true);
                             explanationElement.style.display = 'block'; // Exibir explicação
                         } else {
-                            selectedLabel.style.backgroundColor = 'red';
+                            selectedArray.forEach(ans => {
+                                const label = answerContainer.querySelector(`input[value="${ans}"]`).parentElement;
+                                label.style.backgroundColor = 'red';
+                            });
                             incorrectCount++;
                             incorrectCounter.textContent = incorrectCount;
                             inputs.forEach(input => input.disabled = true);
                             explanationElement.style.display = 'block'; // Exibir explicação
 
-                            const correctLabel = answerContainer.querySelector(`input[value="${currentQuestion.correctAnswer}"]`)?.parentElement;
-                            if (correctLabel) correctLabel.style.backgroundColor = 'green';
+                            currentQuestion.correctAnswer.forEach(correctOption => {
+                                const correctLabel = answerContainer.querySelector(`input[value="${correctOption}"]`)?.parentElement;
+                                if (correctLabel) correctLabel.style.backgroundColor = 'green';
+                            });
                         }
                     }
-                    updateStatusMessage();
-                });
+                } else {
+                    attempts++;
+                    if (selectedOption === currentQuestion.correctAnswer) {
+                        correctCount++;
+                        correctCounter.textContent = correctCount;
+                        selectedLabel.style.backgroundColor = 'green';
+                        answeredCorrectly = true;
+                        inputs.forEach(input => input.disabled = true);
+                        explanationElement.style.display = 'block'; // Exibir explicação
+                    } else {
+                        selectedLabel.style.backgroundColor = 'red';
+                        incorrectCount++;
+                        incorrectCounter.textContent = incorrectCount;
+                        inputs.forEach(input => input.disabled = true);
+                        explanationElement.style.display = 'block'; // Exibir explicação
+
+                        const correctLabel = answerContainer.querySelector(`input[value="${currentQuestion.correctAnswer}"]`)?.parentElement;
+                        if (correctLabel) correctLabel.style.backgroundColor = 'green';
+                    }
+                }
+                updateStatusMessage();
             });
         });
-    }
-
+    });
+}
     function updateStatusMessage() {
         const requiredCorrectAnswers = Math.ceil((passingPercentage / 100) * currentQuestions.length);
         const remainingCorrectAnswers = requiredCorrectAnswers - correctCount;
