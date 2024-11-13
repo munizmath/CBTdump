@@ -23,6 +23,14 @@ document.addEventListener('DOMContentLoaded', function () {
             updateStatusMessage();
         });
 
+    // Função para embaralhar as perguntas
+    function shuffleArray(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+    }
+
     function buildQuiz(questions) {
         if (questions.length === 0) {
             quizContainer.innerHTML = '';
@@ -191,6 +199,9 @@ document.addEventListener('DOMContentLoaded', function () {
             const start = (partNumber - 1) * 25;
             return allQuestions.slice(start, start + 25);
         });
+        
+        // Embaralhar perguntas selecionadas antes de exibir
+        shuffleArray(currentQuestions);
         buildQuiz(currentQuestions);
         updateStatusMessage();
     }
@@ -198,6 +209,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function selectAllParts() {
         passingPercentage = 85;
         currentQuestions = allQuestions;
+        shuffleArray(currentQuestions);  // Embaralhar todas as perguntas
         buildQuiz(currentQuestions);
         updateStatusMessage();
     }
