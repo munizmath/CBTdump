@@ -15,6 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let remainingTime = 0;
     let timerInterval = null;
 
+    // Carregar perguntas do arquivo JSON
     fetch('questions.json')
         .then(response => response.json())
         .then(data => {
@@ -28,6 +29,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
+        // Inicializar contadores
         correctCount = 0;
         incorrectCount = 0;
         correctCounter.textContent = correctCount;
@@ -51,6 +53,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         quizContainer.innerHTML = output.join('');
 
+        // Adicionar event listeners a cada resposta
         questions.forEach((currentQuestion, questionNumber) => {
             const answerContainer = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .answers`);
 
@@ -68,13 +71,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
                     if (selectedOption === currentQuestion.correctAnswer) {
                         correctCount++;
-                        correctCounter.textContent = correctCount;
+                        correctCounter.textContent = correctCount;  // Atualiza o contador correto imediatamente
                         selectedLabel.style.backgroundColor = 'green'; // Marca a resposta correta em verde
                         answeredCorrectly = true;
                         inputs.forEach(input => input.disabled = true);
                     } else {
                         incorrectCount++;
-                        incorrectCounter.textContent = incorrectCount;
+                        incorrectCounter.textContent = incorrectCount; // Atualiza o contador incorreto imediatamente
                         selectedLabel.style.backgroundColor = 'red'; // Marca a resposta incorreta em vermelho
                         inputs.forEach(input => input.disabled = true);
 
