@@ -9,12 +9,52 @@
         margin: 0;
         padding: 0;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
         background-color: #312e2e;
     }
 
+    /* Remova a margem esquerda do quiz-container */
+    #quiz-container {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    #quiz-box {
+        background-color: white;
+        padding: 20px;
+        border-radius: 5px;
+        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+        width: calc(100% - 300px); /* Ajuste a largura considerando a largura do sidebar */
+        margin: 0;
+        margin-top: 5%;
+        margin-bottom: 5%;
+        overflow-y: auto;
+        height: 80%;
+        max-width: none;
+    }
+
+    /* Defina a largura fixa para o sidebar */
+    #sidebar {
+        position: fixed;
+        right: 0;
+        top: 0;
+        width: 300px; /* Defina a largura fixa do sidebar */
+        height: 100%;
+        background-color: #f5f5f5;
+        padding: 20px;
+        box-sizing: border-box;
+        overflow: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Ajuste o body para alinhar itens no início */
+    body {
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+
+    /* Outros estilos permanecem os mesmos */
     input[type="radio"], input[type="checkbox"] {
         display: none;
     }
@@ -35,23 +75,6 @@
         background-color: #5b5c5e;
     }
 
-    #sidebar {
-        position: fixed;
-        right: 0;
-        height: 100%;
-        background-color: #f5f5f5;
-        padding: 20px;
-        box-sizing: border-box;
-        overflow: auto;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #quiz-container {
-        margin-left: 10%; /* Ajuste para centralizar melhor */
-    }
-
     #countdown, #timer {
         text-align: center;
         font-size: 2em;
@@ -61,18 +84,6 @@
     #score {
         text-align: center;
         font-size: 1.5em;
-    }
-
-    #quiz-box {
-        background-color: white;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
-        width: 70%; /* Reduz a largura do quiz box para centralizar */
-        margin: 0 5% 5% 10%; /* Ajusta as margens para centralizar melhor */
-        overflow-y: auto;
-        height: 80%;
-        max-width: 750px;
     }
 
     label.correct {
@@ -157,6 +168,7 @@
             width: 100%;
             margin: 0;
             padding: 10px;
+            max-width: none;
         }
 
         /* Reduz o tamanho dos botões e dos textos */
@@ -178,6 +190,7 @@
         max-height: 70vh;
     }
 </style>
+
 </head>
 <body>
     <div id="sidebar">
