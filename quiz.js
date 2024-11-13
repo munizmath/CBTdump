@@ -23,7 +23,6 @@ document.addEventListener('DOMContentLoaded', function () {
             updateStatusMessage();
         });
 
-    // Function to build and display the quiz
     function buildQuiz(questions) {
         if (questions.length === 0) {
             quizContainer.innerHTML = '';
@@ -53,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         quizContainer.innerHTML = output.join('');
 
-        // Add event listeners to check answers
         questions.forEach((currentQuestion, questionNumber) => {
             const answerContainer = quizContainer.querySelector(`.answers:nth-child(${questionNumber * 2 + 2})`);
             let attempts = 0;
@@ -89,7 +87,6 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // Update status message based on quiz progress
     function updateStatusMessage() {
         const requiredCorrectAnswers = Math.ceil((passingPercentage / 100) * currentQuestions.length);
         const remainingCorrectAnswers = requiredCorrectAnswers - correctCount;
@@ -105,7 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Select a part and add questions to the quiz
     function selectPart(partNumber) {
         if (selectedParts.length >= 3) {
             alert("Você já selecionou 3 partes.");
@@ -131,7 +127,6 @@ document.addEventListener('DOMContentLoaded', function () {
         updateQuiz();
     }
 
-    // Update the timer display
     function updateTimer() {
         const minutes = Math.floor(remainingTime / 60);
         const seconds = remainingTime % 60;
@@ -145,7 +140,6 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Update quiz with selected parts
     function updateQuiz() {
         currentQuestions = selectedParts.flatMap(partNumber => {
             const start = (partNumber - 1) * 25;
@@ -155,7 +149,6 @@ document.addEventListener('DOMContentLoaded', function () {
         updateStatusMessage();
     }
 
-    // Select all parts and update the passing percentage
     function selectAllParts() {
         passingPercentage = 85;
         currentQuestions = allQuestions;
@@ -163,12 +156,10 @@ document.addEventListener('DOMContentLoaded', function () {
         updateStatusMessage();
     }
 
-    // Restart the quiz
     restartButton.addEventListener('click', function () {
         resetParts();
     });
 
-    // Reset selected parts, counters, and timer
     function resetParts() {
         selectedParts = [];
         currentQuestions = [];
