@@ -12,10 +12,9 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentQuestions = [];
     let passingPercentage = 75;
     let selectedParts = [];
-    let remainingTime = 0; // Em segundos
+    let remainingTime = 0;
     let timerInterval = null;
 
-    // Fetch questions from JSON file
     fetch('questions.json')
         .then(response => response.json())
         .then(data => {
@@ -53,7 +52,10 @@ document.addEventListener('DOMContentLoaded', function () {
         quizContainer.innerHTML = output.join('');
 
         questions.forEach((currentQuestion, questionNumber) => {
-            const answerContainer = quizContainer.querySelector(`.answers:nth-child(${questionNumber * 2 + 2})`);
+            const answerContainer = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .answers`);
+
+            if (!answerContainer) return;  // Ignora se não encontrar o container de resposta
+
             let attempts = 0;
             let answeredCorrectly = false;
 
@@ -76,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
                         incorrectCounter.textContent = incorrectCount;
                         answerContainer.style.color = 'red';
                         allInputs.forEach(input => input.disabled = true);
-                        const correctLabel = answerContainer.querySelector(`input[value="${currentQuestion.correctAnswer}"]`).parentElement;
-                        correctLabel.style.backgroundColor = 'yellow';
+                        const correctLabel = answerContainer.querySelector(`input[value="${currentQuestion.correctAnswer}"]`)?.parentElement;
+                        if (correctLabel) correctLabel.style.backgroundColor = 'yellow';
                     } else {
                         event.target.disabled = true;
                     }
