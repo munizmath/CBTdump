@@ -72,6 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const explanationElement = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .explanation`);
             if (!answerContainer) return;
 
+            console.log(`Question ${questionNumber + 1}: Loaded explanation: ${currentQuestion.explanation}`); // Verificação
+
             let maxAttempts = Array.isArray(currentQuestion.correctAnswer) ? 2 : 1;
             let attempts = 0;
             let selectedAnswers = new Set();
@@ -103,7 +105,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     label.style.backgroundColor = 'green';
                                 });
                                 answeredCorrectly = true;
-                                explanationElement.style.display = 'block';
+                                explanationElement.style.display = 'block'; // Exibir explicação
                             } else {
                                 selectedArray.forEach(ans => {
                                     const label = answerContainer.querySelector(`input[value="${ans}"]`).parentElement;
@@ -112,7 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 incorrectCount++;
                                 incorrectCounter.textContent = incorrectCount;
                                 inputs.forEach(input => input.disabled = true);
-                                explanationElement.style.display = 'block';
+                                explanationElement.style.display = 'block'; // Exibir explicação
 
                                 currentQuestion.correctAnswer.forEach(correctOption => {
                                     const correctLabel = answerContainer.querySelector(`input[value="${correctOption}"]`)?.parentElement;
@@ -128,13 +130,13 @@ document.addEventListener('DOMContentLoaded', function () {
                             selectedLabel.style.backgroundColor = 'green';
                             answeredCorrectly = true;
                             inputs.forEach(input => input.disabled = true);
-                            explanationElement.style.display = 'block';
+                            explanationElement.style.display = 'block'; // Exibir explicação
                         } else {
                             selectedLabel.style.backgroundColor = 'red';
                             incorrectCount++;
                             incorrectCounter.textContent = incorrectCount;
                             inputs.forEach(input => input.disabled = true);
-                            explanationElement.style.display = 'block';
+                            explanationElement.style.display = 'block'; // Exibir explicação
 
                             const correctLabel = answerContainer.querySelector(`input[value="${currentQuestion.correctAnswer}"]`)?.parentElement;
                             if (correctLabel) correctLabel.style.backgroundColor = 'green';
