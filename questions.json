@@ -1404,6 +1404,435 @@
       },
       "correctAnswer": "B",
       "explanation": "O cliente é responsável por atualizar o sistema operacional e o software no desktop virtual do Amazon WorkSpaces."
+    },
+    {
+        "id": 116,
+        "question": "Uma empresa precisa de um banco de dados para consultas. O banco de dados deve resumir colunas de dados para relatórios analíticos. Qual serviço da AWS atenderá a esses requisitos?",
+        "options": {
+            "A": "Amazon Aurora",
+            "B": "Amazon DynamoDB",
+            "C": "Amazon Redshift",
+            "D": "Amazon Neptune"
+        },
+        "correctAnswer": "C",
+        "explanation": "O Amazon Redshift é um serviço de data warehouse totalmente gerenciado que permite consultas analíticas e sumarização de dados em colunas, ideal para relatórios analíticos."
+    },
+    {
+        "id": 117,
+        "question": "Um desenvolvedor web tem conhecimento limitado dos serviços de rede da AWS, como Amazon VPC, Elastic Load Balancing e Auto Scaling, mas quer hospedar uma aplicação web altamente disponível. Qual serviço da AWS lidaria automaticamente com a implantação e reduziria a complexidade para o desenvolvedor?",
+        "options": {
+            "A": "AWS CodeDeploy",
+            "B": "AWS Resource Access Manager",
+            "C": "AWS Elastic Beanstalk",
+            "D": "AWS CloudFormation"
+        },
+        "correctAnswer": "C",
+        "explanation": "O Elastic Beanstalk lida automaticamente com a implantação e gerenciamento da infraestrutura, reduzindo a complexidade para o desenvolvedor."
+    },
+    {
+        "id": 118,
+        "question": "Qual serviço da AWS lida automaticamente com o monitoramento da integridade da aplicação?",
+        "options": {
+            "A": "Amazon API Gateway",
+            "B": "AWS Elastic Beanstalk",
+            "C": "AWS Lambda",
+            "D": "AWS Config"
+        },
+        "correctAnswer": "B",
+        "explanation": "O Elastic Beanstalk inclui o monitoramento de integridade da aplicação, facilitando a gestão."
+    },
+    {
+        "id": 119,
+        "question": "Uma empresa está executando uma aplicação replicada em seis instâncias do Amazon EC2 baseadas em Linux em duas zonas de disponibilidade em uma região da AWS. A aplicação precisa de acesso compartilhado aos dados. Os dados serão alterados com frequência pela aplicação nos arquivos de dados existentes. Qual solução de armazenamento da AWS atenderia às necessidades da empresa com a MENOR sobrecarga operacional?",
+        "options": {
+            "A": "Amazon Elastic Block Store (Amazon EBS) Multi-Attach",
+            "B": "Amazon Elastic File System (Amazon EFS)",
+            "C": "Amazon S3",
+            "D": "Amazon FSx for Lustre"
+        },
+        "correctAnswer": "B",
+        "explanation": "O Amazon EFS fornece um sistema de arquivos compartilhado acessível por instâncias do EC2 em várias zonas de disponibilidade, com baixa sobrecarga operacional."
+    },
+    {
+        "id": 120,
+        "question": "Uma empresa precisa estabelecer uma conexão de rede dedicada e isolada entre o data center on-premises da empresa e a AWS. Qual serviço da AWS atenderá a esse requisito?",
+        "options": {
+            "A": "AWS Site-to-Site VPN",
+            "B": "AWS Direct Connect",
+            "C": "Amazon Route 53",
+            "D": "AWS WAF"
+        },
+        "correctAnswer": "B",
+        "explanation": "O Direct Connect estabelece uma conexão de rede dedicada e isolada da internet entre o data center on-premises e a AWS."
+    },
+    {
+        "id": 121,
+        "question": "Quais serviços da AWS oferecem recursos de computação? (Selecione DUAS.)",
+        "options": {
+            "A": "Amazon EC2",
+            "B": "Amazon S3",
+            "C": "Amazon Elastic Block Store (Amazon EBS)",
+            "D": "Amazon Cognito",
+            "E": "AWS Lambda"
+        },
+        "correctAnswer": "A, E",
+        "explanation": "Amazon EC2 e AWS Lambda fornecem recursos de computação, permitindo executar cargas de trabalho na nuvem."
+    },
+    {
+        "id": 122,
+        "question": "Qual serviço da AWS pode converter texto em fala realista?",
+        "options": {
+            "A": "Amazon Polly",
+            "B": "Amazon Textract",
+            "C": "Amazon Transcribe",
+            "D": "Amazon Comprehend"
+        },
+        "correctAnswer": "A",
+        "explanation": "O Amazon Polly transforma texto em fala realista, ideal para aplicações que precisam de saída de áudio a partir de texto."
+    },
+    {
+        "id": 123,
+        "question": "Um administrador de sistemas quer migrar um site estático para a AWS. O administrador do sistema quer parar de pagar pelo poder computacional necessário para executar servidores web. Qual serviço da AWS atenderá a esses requisitos?",
+        "options": {
+            "A": "Amazon EC2",
+            "B": "AWS Lambda",
+            "C": "Amazon Lightsail",
+            "D": "Amazon S3"
+        },
+        "correctAnswer": "D",
+        "explanation": "O Amazon S3 é ideal para hospedar sites estáticos, eliminando a necessidade de servidores sempre em execução."
+    },
+    {
+        "id": 124,
+        "question": "Uma empresa exige uma conexão criptografada do data center on-premises da empresa com a AWS. A conexão deve usar a conexão de internet existente da empresa. Qual solução atenderá a esses requisitos?",
+        "options": {
+            "A": "AWS Client VPN",
+            "B": "Amazon Connect",
+            "C": "AWS Direct Connect",
+            "D": "AWS Site-to-Site VPN"
+        },
+        "correctAnswer": "D",
+        "explanation": "O Site-to-Site VPN cria uma conexão criptografada usando a internet entre o data center on-premises e a nuvem AWS."
+    },
+    {
+        "id": 125,
+        "question": "Qual serviço da AWS pode ser usado para desacoplar aplicações?",
+        "options": {
+            "A": "AWS Config",
+            "B": "Amazon Simple Queue Service (Amazon SQS)",
+            "C": "AWS Batch",
+            "D": "Amazon Simple Email Service (Amazon SES)"
+        },
+        "correctAnswer": "B",
+        "explanation": "O Amazon SQS é um serviço de fila de mensagens totalmente gerenciado que permite desacoplar e escalar aplicações e microsserviços."
+    },
+    {
+        "id": 126,
+        "question": "Quais são os benefícios da execução de um banco de dados no Amazon RDS em comparação com um banco de dados on-premises? (Selecione DUAS.)",
+        "options": {
+            "A": "O RDS fornece backups por padrão.",
+            "B": "O RDS é compatível com qualquer banco de dados relacional.",
+            "C": "O RDS custa o mesmo, independentemente do mecanismo de banco de dados usado.",
+            "D": "A capacidade computacional do banco de dados do RDS pode ser facilmente dimensionada.",
+            "E": "Os grupos de segurança do RDS são gerenciados pela AWS."
+        },
+        "correctAnswer": "A, D",
+        "explanation": "O Amazon RDS fornece backups automatizados e facilita o dimensionamento da capacidade computacional do banco de dados conforme necessário."
+    },
+    {
+        "id": 127,
+        "question": "Uma empresa precisa entregar dados, vídeos, aplicações e APIs com segurança para usuários em todo o mundo com baixa latência. Qual serviço da AWS atenderá a esse requisito?",
+        "options": {
+            "A": "Amazon EC2",
+            "B": "Amazon CloudFront",
+            "C": "Amazon RDS",
+            "D": "Amazon VPC"
+        },
+        "correctAnswer": "B",
+        "explanation": "O Amazon CloudFront é uma CDN que entrega conteúdo globalmente com baixa latência, ideal para dados, vídeos, aplicações e APIs."
+    },
+    {
+        "id": 128,
+        "question": "Qual serviço da AWS pode ser usado para fornecer uma central de atendimento sob demanda baseada na nuvem?",
+        "options": {
+            "A": "AWS Direct Connect",
+            "B": "Amazon Connect",
+            "C": "AWS Support",
+            "D": "AWS Managed Services"
+        },
+        "correctAnswer": "B",
+        "explanation": "O Amazon Connect é um serviço de central de atendimento baseado na nuvem, permitindo configurar uma central de atendimento sob demanda."
+    },
+    {
+        "id": 129,
+        "question": "Uma aplicação essencial para os negócios requer implantação em várias regiões para atender aos acordos de nível de serviço (SLAs) de disponibilidade. Qual serviço ou recurso da AWS deve ser usado para roteamento de rede e balanceamento de carga para essa aplicação?",
+        "options": {
+            "A": "Amazon Route 53",
+            "B": "Application Load Balancer (ALB)",
+            "C": "Amazon API Gateway",
+            "D": "AWS Site-to-Site VPN"
+        },
+        "correctAnswer": "A",
+        "explanation": "O Amazon Route 53 é um serviço de DNS que permite roteamento entre múltiplas regiões, ideal para atender a SLAs de alta disponibilidade."
+    },
+    {
+        "id": 130,
+        "question": "Para que os locais de borda da AWS devem ser usados? (Selecione DUAS.)",
+        "options": {
+            "A": "Hospedagem de aplicações e bancos de dados",
+            "B": "Entrega de conteúdo mais próximo dos usuários",
+            "C": "Execução de serviços de armazenamento em cache de banco de dados NoSQL",
+            "D": "Redução da carga em servidores web baseados no Amazon EC2",
+            "E": "Envio de mensagens de notificação a usuários finais"
+        },
+        "correctAnswer": "B, D",
+        "explanation": "Os locais de borda são pontos de presença globais da AWS que permitem entregar conteúdo mais próximo dos usuários e reduzir a carga nos servidores de origem."
+    },
+    {
+        "id": 131,
+        "question": "Qual elemento define uma zona de disponibilidade da AWS?",
+        "options": {
+            "A": "Um ou mais data centers físicos com energia e rede redundantes",
+            "B": "Uma localização geográfica completamente isolada de outros locais da AWS",
+            "C": "Um ou mais locais de borda baseados em todo o mundo",
+            "D": "Um local de data center com uma única fonte de energia e rede"
+        },
+        "correctAnswer": "A",
+        "explanation": "Uma zona de disponibilidade é composta por um ou mais data centers com energia e rede redundantes para maior disponibilidade."
+    },
+    {
+        "id": 132,
+        "question": "Quais recursos ou serviços da AWS são compatíveis com a replicação de dados em todas as regiões AWS? (Selecione DUAS.)",
+        "options": {
+            "A": "Amazon S3",
+            "B": "Amazon Elastic Block Store (Amazon EBS)",
+            "C": "Armazenamento de instância do Amazon EC2",
+            "D": "AWS Storage Gateway",
+            "E": "Amazon RDS"
+        },
+        "correctAnswer": "A, E",
+        "explanation": "O Amazon S3 e o Amazon RDS suportam replicação entre regiões, sendo ideais para redundância e recuperação de desastres."
+    },
+    {
+        "id": 133,
+        "question": "Qual serviço da AWS pode analisar um conjunto de documentos para gerar informações valiosas a partir do texto?",
+        "options": {
+            "A": "Amazon Textract",
+            "B": "Amazon Comprehend",
+            "C": "Amazon Polly",
+            "D": "Amazon Transcribe"
+        },
+        "correctAnswer": "B",
+        "explanation": "O Amazon Comprehend é um serviço de processamento de linguagem natural que analisa texto e gera insights, como sentimentos e entidades."
+    },
+    {
+        "id": 134,
+        "question": "Uma empresa gostaria de hospedar seus bancos de dados MySQL na AWS e manter total controle sobre o sistema operacional, a instalação e a configuração do banco de dados. Qual serviço da AWS a empresa deve usar para hospedar os bancos de dados?",
+        "options": {
+            "A": "Amazon RDS",
+            "B": "Amazon EC2",
+            "C": "Amazon DynamoDB",
+            "D": "Amazon Aurora"
+        },
+        "correctAnswer": "B",
+        "explanation": "O Amazon EC2 oferece controle total sobre o sistema operacional, instalação e configuração, sendo ideal para quem deseja controle total sobre o banco de dados."
+    },
+    {
+        "id": 135,
+        "question": "Qual serviço da AWS oferece throughput e dimensionamento virtualmente ilimitados?",
+        "options": {
+            "A": "Amazon DynamoDB",
+            "B": "Amazon RDS para Oracle",
+            "C": "Amazon Redshift",
+            "D": "Amazon OpenSearch Service"
+        },
+        "correctAnswer": "A",
+        "explanation": "O Amazon DynamoDB é um banco de dados NoSQL que permite escalabilidade automática e alto throughput."
+    },
+    {
+        "id": 136,
+        "question": "Qual ferramenta ou recurso da AWS compara preços de diferentes serviços, cria estimativas aproximadas dos custos mensais totais e exporta as estimativas para um arquivo .csv?",
+        "options": {
+            "A": "Cost Explorer",
+            "B": "AWS Pricing Calculator",
+            "C": "Cobrança consolidada",
+            "D": "AWS Budgets"
+        },
+        "correctAnswer": "B",
+        "explanation": "O AWS Pricing Calculator permite comparar preços de serviços e exportar estimativas em arquivos .csv."
+    },
+    {
+        "id": 137,
+        "question": "O que o AWS Marketplace permite que os usuários façam? (Selecione DUAS.)",
+        "options": {
+            "A": "Vendam instâncias spot do Amazon EC2 não utilizadas.",
+            "B": "Vendam soluções para outros usuários da AWS.",
+            "C": "Comprem software de terceiros executado na AWS.",
+            "D": "Comprem documentos sobre segurança e conformidade da AWS.",
+            "E": "Peçam o AWS Snowball Edge."
+        },
+        "correctAnswer": "B, C",
+        "explanation": "O AWS Marketplace permite que os usuários vendam soluções e comprem software de terceiros que funciona na AWS."
+    },
+    {
+        "id": 138,
+        "question": "Como uma conta da AWS pode usar instâncias reservadas de outra conta da AWS?",
+        "options": {
+            "A": "Usando instâncias dedicadas",
+            "B": "Usando a cobrança consolidada",
+            "C": "Usando a ferramenta AWS Cost Explorer",
+            "D": "Usando o AWS Budgets"
+        },
+        "correctAnswer": "B",
+        "explanation": "A cobrança consolidada permite que as contas dentro da mesma organização compartilhem instâncias reservadas e aproveitem os descontos."
+    },
+    {
+        "id": 139,
+        "question": "Uma empresa está migrando de data centers on-premises para a nuvem AWS e quer ajuda prática com o projeto. Como a empresa pode obter esse suporte? (Selecione DUAS.)",
+        "options": {
+            "A": "Solicitando uma cotação da equipe do AWS Marketplace para realizar uma migração para a conta da AWS da empresa.",
+            "B": "Entrando em contato com o treinamento da AWS e abrindo um caso para obter assistência.",
+            "C": "Usando o AWS Professional Services.",
+            "D": "Selecionando um parceiro da AWS Partner Network (APN) para auxiliar na migração.",
+            "E": "Usando o Amazon Connect para criar uma nova solicitação de proposta (RFP) para assistência especializada na migração para a nuvem AWS."
+        },
+        "correctAnswer": "C, D",
+        "explanation": "O AWS Professional Services e os parceiros da APN oferecem suporte especializado e prático para ajudar com a migração para a AWS."
+    },
+    {
+        "id": 140,
+        "question": "Quais períodos estão disponíveis quando uma empresa compra instâncias reservadas do Amazon EC2 diretamente da AWS? (Selecione DUAS.)",
+        "options": {
+            "A": "6 meses",
+            "B": "1 ano",
+            "C": "3 anos",
+            "D": "4 anos",
+            "E": "5 anos"
+        },
+        "correctAnswer": "B, C",
+        "explanation": "As instâncias reservadas do Amazon EC2 podem ser compradas com compromisso de 1 ou 3 anos diretamente da AWS, oferecendo descontos proporcionais ao tempo."
+    },
+    {
+        "id": 141,
+        "question": "Qual das opções a seguir permite que os usuários da AWS gerenciem alocações de custo para faturamento?",
+        "options": {
+            "A": "Marcar recursos",
+            "B": "Limitar quem pode criar recursos",
+            "C": "Adicionar um método de pagamento secundário",
+            "D": "Executar todas as operações em uma única conta da AWS"
+        },
+        "correctAnswer": "A",
+        "explanation": "Marcar recursos permite que os usuários atribuam custos específicos, facilitando o gerenciamento e alocação para faturamento."
+    },
+    {
+        "id": 142,
+        "question": "Onde os usuários devem encontrar um catálogo de fornecedores gratuitos ou compráveis de soluções de terceiros reconhecidos pela AWS?",
+        "options": {
+            "A": "AWS Service Catalog",
+            "B": "AWS Marketplace",
+            "C": "AWS Partner Solutions",
+            "D": "AWS CodeDeploy"
+        },
+        "correctAnswer": "B",
+        "explanation": "O AWS Marketplace é um catálogo digital onde os usuários podem comprar e implantar software e serviços de terceiros."
+    },
+    {
+        "id": 143,
+        "question": "Qual plano do AWS Support fornece acesso a todas as verificações do AWS Trusted Advisor com o MENOR custo?",
+        "options": {
+            "A": "Suporte AWS Básico",
+            "B": "Suporte AWS ao Desenvolvedor",
+            "C": "Suporte AWS Empresarial",
+            "D": "Suporte AWS Empresarial de Grande Porte"
+        },
+        "correctAnswer": "C",
+        "explanation": "O Suporte AWS Empresarial oferece acesso a todas as verificações do Trusted Advisor ao menor custo entre os planos que incluem esse recurso."
+    },
+    {
+        "id": 144,
+        "question": "Qual ferramenta identificará a economia de custos ao localizar recursos ociosos do Amazon EC2?",
+        "options": {
+            "A": "AWS Trusted Advisor",
+            "B": "AWS CloudTrail",
+            "C": "Amazon CloudWatch",
+            "D": "Amazon QuickSight"
+        },
+        "correctAnswer": "A",
+        "explanation": "O AWS Trusted Advisor analisa o ambiente e identifica recursos ociosos, ajudando a otimizar e reduzir custos."
+    },
+    {
+        "id": 145,
+        "question": "O que pode ser usado para reduzir o custo da execução de instâncias do Amazon EC2? (Selecione DUAS.)",
+        "options": {
+            "A": "Instâncias spot para cargas de trabalho flexíveis e stateless",
+            "B": "Instâncias otimizadas para memória para cargas de trabalho de alta computação",
+            "C": "Instâncias sob demanda para cargas de trabalho de alto custo e sustentadas",
+            "D": "Instâncias reservadas para cargas de trabalho sustentadas",
+            "E": "Limites de gastos definidos usando o AWS Budgets"
+        },
+        "correctAnswer": "A, D",
+        "explanation": "Instâncias spot e reservadas são alternativas de baixo custo em comparação com instâncias sob demanda, sendo ideais para economizar em cargas de trabalho específicas."
+    },
+    {
+        "id": 146,
+        "question": "Uma empresa precisa de acesso ininterrupto por telefone, e-mail e chat. O tempo de resposta deve ser inferior a 1 hora se um sistema de produção tiver uma interrupção do serviço. Qual plano do AWS Support atende a esses requisitos com o MENOR custo?",
+        "options": {
+            "A": "Suporte AWS Básico",
+            "B": "Suporte AWS ao Desenvolvedor",
+            "C": "Suporte AWS Empresarial",
+            "D": "Suporte AWS Empresarial de Grande Porte"
+        },
+        "correctAnswer": "C",
+        "explanation": "O Suporte AWS Empresarial oferece suporte por telefone, e-mail e chat com tempo de resposta inferior a 1 hora para interrupções em sistemas de produção."
+    },
+    {
+        "id": 147,
+        "question": "Qual recurso do AWS Organizations pode ser usado para rastrear cobranças em várias contas e relatar o custo combinado?",
+        "options": {
+            "A": "Políticas de controle de serviço (SCPs)",
+            "B": "AWS Budgets",
+            "C": "Cobrança consolidada",
+            "D": "AWS Identity and Access Management (IAM)"
+        },
+        "correctAnswer": "C",
+        "explanation": "A cobrança consolidada no AWS Organizations permite rastrear e consolidar os custos de várias contas em um único relatório."
+    },
+    {
+        "id": 148,
+        "question": "Uma empresa está construindo um sistema que coletará grandes quantidades de dados durante o dia e os analisará à noite. Se necessário, a análise pode ocorrer a qualquer hora do dia. A análise requer centenas de instâncias do Amazon EC2 para processar os dados e entregar os resultados. A empresa precisa de uma solução que minimize os custos. Qual opção de compra do Amazon EC2 atenderá a esses requisitos?",
+        "options": {
+            "A": "Instâncias reservadas",
+            "B": "Instâncias spot",
+            "C": "Instâncias sob demanda",
+            "D": "Instâncias dedicadas"
+        },
+        "correctAnswer": "B",
+        "explanation": "Instâncias spot são ideais para tarefas flexíveis que podem ser interrompidas e retomadas, oferecendo uma solução de baixo custo para análises de grandes volumes de dados."
+    },
+    {
+        "id": 149,
+        "question": "Qual modelo de preço do Amazon EC2 ajusta o custo com base na oferta e na demanda de instâncias do EC2?",
+        "options": {
+            "A": "Instâncias sob demanda",
+            "B": "Instâncias reservadas",
+            "C": "Instâncias spot",
+            "D": "Instâncias reservadas conversíveis"
+        },
+        "correctAnswer": "C",
+        "explanation": "Instâncias spot ajustam o preço com base na oferta e demanda da capacidade ociosa da AWS."
+    },
+    {
+        "id": 150,
+        "question": "Qual das ações a seguir uma empresa pode executar com as ferramentas do AWS Billing and Cost Management? (Selecione DUAS.)",
+        "options": {
+            "A": "Encerrar todos os recursos da AWS automaticamente se os limites orçamentários forem excedidos.",
+            "B": "Reduzir os custos da AWS por dia, serviço e a conta da AWS vinculada.",
+            "C": "Criar orçamentos e receber notificações se o uso atual ou o uso previsto exceder esses orçamentos.",
+            "D": "Alternar para instâncias reservadas ou instâncias spot automaticamente, baseado em qual instância é a mais econômica.",
+            "E": "Mover os dados armazenados no Amazon S3 para uma classe de armazenamento mais econômica."
+        },
+        "correctAnswer": "B, C",
+        "explanation": "Com o AWS Billing and Cost Management, é possível visualizar custos por período, serviço e criar orçamentos com alertas automáticos."
     }
-  ]
+]
 }
