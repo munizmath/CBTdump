@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
             let maxAttempts = Array.isArray(currentQuestion.correctAnswer) ? 2 : 1;
             let attempts = 0;
-            let selectedAnswers = [];
+            let selectedAnswers = new Set();
             let answeredCorrectly = false;
 
             const inputs = answerContainer.querySelectorAll(`input[type="${Array.isArray(currentQuestion.correctAnswer) ? "checkbox" : "radio"}"]`);
@@ -73,26 +73,26 @@ document.addEventListener('DOMContentLoaded', function () {
                     const selectedLabel = event.target.parentElement;
 
                     if (Array.isArray(currentQuestion.correctAnswer)) {
-                        // Permitir múltiplas seleções para perguntas com várias respostas corretas
+                        // Múltiplas respostas corretas
                         if (event.target.checked) {
-                            selectedAnswers.push(selectedOption);
+                            selectedAnswers.add(selectedOption);
                         } else {
-                            selectedAnswers = selectedAnswers.filter(ans => ans !== selectedOption);
+                            selectedAnswers.delete(selectedOption);
                         }
 
-                        // Se o usuário fez duas seleções, avaliar
-                        if (selectedAnswers.length === 2) {
+                        if (selectedAnswers.size === 2) {
                             attempts++;
-                            if (selectedAnswers.every(ans => currentQuestion.correctAnswer.includes(ans))) {
+                            const selectedArray = Array.from(selectedAnswers);
+                            if (selectedArray.every(ans => currentQuestion.correctAnswer.includes(ans))) {
                                 correctCount++;
                                 correctCounter.textContent = correctCount;
-                                selectedAnswers.forEach(ans => {
+                                selectedArray.forEach(ans => {
                                     const label = answerContainer.querySelector(`input[value="${ans}"]`).parentElement;
                                     label.style.backgroundColor = 'green';
                                 });
                                 answeredCorrectly = true;
                             } else {
-                                selectedAnswers.forEach(ans => {
+                                selectedArray.forEach(ans => {
                                     const label = answerContainer.querySelector(`input[value="${ans}"]`).parentElement;
                                     label.style.backgroundColor = 'red';
                                 });
