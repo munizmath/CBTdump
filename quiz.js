@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function () {
                         selectedOption === currentQuestion.correctAnswer
                     ) {
                         correctCount++;
-                        correctCounter.textContent = correctCount;  // Atualiza o contador correto imediatamente
+                        correctCounter.textContent = correctCount;
                         selectedLabel.style.backgroundColor = 'green'; // Marca a resposta correta em verde
                         answeredCorrectly = true;
                         inputs.forEach(input => input.disabled = true);
@@ -85,10 +85,10 @@ document.addEventListener('DOMContentLoaded', function () {
                         selectedLabel.style.backgroundColor = 'red'; // Marca a resposta incorreta em vermelho
                         if (attempts >= maxAttempts) {
                             incorrectCount++;
-                            incorrectCounter.textContent = incorrectCount; // Atualiza o contador incorreto imediatamente
+                            incorrectCounter.textContent = incorrectCount;
                             inputs.forEach(input => input.disabled = true);
 
-                            // Marca a resposta correta em verde após atingir o limite de tentativas
+                            // Exibir a resposta correta em verde
                             const correctAnswers = Array.isArray(currentQuestion.correctAnswer)
                                 ? currentQuestion.correctAnswer
                                 : [currentQuestion.correctAnswer];
@@ -184,7 +184,7 @@ document.addEventListener('DOMContentLoaded', function () {
         incorrectCount = 0;
         correctCounter.textContent = correctCount;
         incorrectCounter.textContent = incorrectCount;
-        passingPercentage = 75;
+        passingPercentage = 80;
 
         remainingTime = 0;
         clearInterval(timerInterval);
