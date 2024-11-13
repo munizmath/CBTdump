@@ -15,7 +15,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let remainingTime = 0;
     let timerInterval = null;
 
-    // Fetch questions from JSON file
     fetch('questions.json')
         .then(response => response.json())
         .then(data => {
@@ -52,7 +51,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
         quizContainer.innerHTML = output.join('');
 
-        // Attach event listeners to each question's answers
         questions.forEach((currentQuestion, questionNumber) => {
             const answerContainer = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .answers`);
 
@@ -61,31 +59,29 @@ document.addEventListener('DOMContentLoaded', function () {
             let attempts = 0;
             let answeredCorrectly = false;
 
-            // Attach change event listener to each radio button in answerContainer
             const inputs = answerContainer.querySelectorAll('input[type="radio"]');
             inputs.forEach(input => {
                 input.addEventListener('change', function (event) {
                     if (answeredCorrectly) return;
 
                     const selectedOption = event.target.value;
+                    const selectedLabel = event.target.parentElement;
 
                     if (selectedOption === currentQuestion.correctAnswer) {
                         correctCount++;
                         correctCounter.textContent = correctCount;
-                        answerContainer.style.color = 'green';
+                        selectedLabel.style.backgroundColor = 'green'; // Marca a resposta correta em verde
                         answeredCorrectly = true;
-                        inputs.forEach(input => input.disabled = true); // Disable all inputs once answered correctly
+                        inputs.forEach(input => input.disabled = true);
                     } else {
                         attempts++;
+                        selectedLabel.style.backgroundColor = 'red'; // Marca a resposta incorreta em vermelho
                         if (attempts >= 3) {
                             incorrectCount++;
                             incorrectCounter.textContent = incorrectCount;
-                            answerContainer.style.color = 'red';
                             inputs.forEach(input => input.disabled = true);
                             const correctLabel = answerContainer.querySelector(`input[value="${currentQuestion.correctAnswer}"]`)?.parentElement;
-                            if (correctLabel) correctLabel.style.backgroundColor = 'yellow';
-                        } else {
-                            event.target.disabled = true; // Disable incorrect answer after attempt
+                            if (correctLabel) correctLabel.style.backgroundColor = 'green'; // Marca a resposta correta em verde após 3 tentativas erradas
                         }
                     }
                     updateStatusMessage();
