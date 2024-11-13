@@ -56,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             if (!answerContainer) return;
 
-            let attempts = 0;
             let answeredCorrectly = false;
 
             const inputs = answerContainer.querySelectorAll('input[type="radio"]');
@@ -74,15 +73,14 @@ document.addEventListener('DOMContentLoaded', function () {
                         answeredCorrectly = true;
                         inputs.forEach(input => input.disabled = true);
                     } else {
-                        attempts++;
+                        incorrectCount++;
+                        incorrectCounter.textContent = incorrectCount;
                         selectedLabel.style.backgroundColor = 'red'; // Marca a resposta incorreta em vermelho
-                        if (attempts >= 3) {
-                            incorrectCount++;
-                            incorrectCounter.textContent = incorrectCount;
-                            inputs.forEach(input => input.disabled = true);
-                            const correctLabel = answerContainer.querySelector(`input[value="${currentQuestion.correctAnswer}"]`)?.parentElement;
-                            if (correctLabel) correctLabel.style.backgroundColor = 'green'; // Marca a resposta correta em verde após 3 tentativas erradas
-                        }
+                        inputs.forEach(input => input.disabled = true);
+
+                        // Marca a resposta correta em verde após seleção incorreta
+                        const correctLabel = answerContainer.querySelector(`input[value="${currentQuestion.correctAnswer}"]`)?.parentElement;
+                        if (correctLabel) correctLabel.style.backgroundColor = 'green';
                     }
                     updateStatusMessage();
                 });
