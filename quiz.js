@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let incorrectCount = 0;
     let allQuestions = [];
     let currentQuestions = [];
-    let passingPercentage = 75;
+    let passingPercentage = 80;
     let selectedParts = [];
     let remainingTime = 0;
     let timerInterval = null;
