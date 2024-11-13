@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', function () {
             updateStatusMessage();
         });
 
-    // Função para embaralhar as perguntas
+    // Função para embaralhar um array (usada para perguntas e respostas)
     function shuffleArray(array) {
         for (let i = array.length - 1; i > 0; i--) {
             const j = Math.floor(Math.random() * (i + 1));
@@ -46,7 +46,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
         const output = questions.map((currentQuestion, questionNumber) => {
             const inputType = Array.isArray(currentQuestion.correctAnswer) ? "checkbox" : "radio";
-            const answers = Object.keys(currentQuestion.options).map(
+            
+            // Embaralhar as opções de resposta
+            const shuffledOptions = shuffleArray(Object.keys(currentQuestion.options));
+
+            const answers = shuffledOptions.map(
                 letter => `
                     <label class="answer">
                         <input type="${inputType}" name="question${questionNumber}" value="${letter}">
