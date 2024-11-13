@@ -56,34 +56,47 @@ document.addEventListener('DOMContentLoaded', function () {
         // Adicionar event listeners a cada resposta
         questions.forEach((currentQuestion, questionNumber) => {
             const answerContainer = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .answers`);
-
             if (!answerContainer) return;
 
+            // Definir limite de tentativas com base no número de respostas corretas
+            let maxAttempts = Array.isArray(currentQuestion.correctAnswer) ? 2 : 1;
+            let attempts = 0;
             let answeredCorrectly = false;
 
             const inputs = answerContainer.querySelectorAll('input[type="radio"]');
             inputs.forEach(input => {
                 input.addEventListener('change', function (event) {
-                    if (answeredCorrectly) return;
+                    if (answeredCorrectly || attempts >= maxAttempts) return;
 
                     const selectedOption = event.target.value;
                     const selectedLabel = event.target.parentElement;
 
-                    if (selectedOption === currentQuestion.correctAnswer) {
+                    if (
+                        (Array.isArray(currentQuestion.correctAnswer) && currentQuestion.correctAnswer.includes(selectedOption)) ||
+                        selectedOption === currentQuestion.correctAnswer
+                    ) {
                         correctCount++;
                         correctCounter.textContent = correctCount;  // Atualiza o contador correto imediatamente
                         selectedLabel.style.backgroundColor = 'green'; // Marca a resposta correta em verde
                         answeredCorrectly = true;
                         inputs.forEach(input => input.disabled = true);
                     } else {
-                        incorrectCount++;
-                        incorrectCounter.textContent = incorrectCount; // Atualiza o contador incorreto imediatamente
+                        attempts++;
                         selectedLabel.style.backgroundColor = 'red'; // Marca a resposta incorreta em vermelho
-                        inputs.forEach(input => input.disabled = true);
+                        if (attempts >= maxAttempts) {
+                            incorrectCount++;
+                            incorrectCounter.textContent = incorrectCount; // Atualiza o contador incorreto imediatamente
+                            inputs.forEach(input => input.disabled = true);
 
-                        // Marca a resposta correta em verde após seleção incorreta
-                        const correctLabel = answerContainer.querySelector(`input[value="${currentQuestion.correctAnswer}"]`)?.parentElement;
-                        if (correctLabel) correctLabel.style.backgroundColor = 'green';
+                            // Marca a resposta correta em verde após atingir o limite de tentativas
+                            const correctAnswers = Array.isArray(currentQuestion.correctAnswer)
+                                ? currentQuestion.correctAnswer
+                                : [currentQuestion.correctAnswer];
+                            correctAnswers.forEach(correctOption => {
+                                const correctLabel = answerContainer.querySelector(`input[value="${correctOption}"]`)?.parentElement;
+                                if (correctLabel) correctLabel.style.backgroundColor = 'green';
+                            });
+                        }
                     }
                     updateStatusMessage();
                 });
