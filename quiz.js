@@ -154,7 +154,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (correctCount + incorrectCount === currentQuestions.length) {
                 statusMessage.textContent = "Você já respondeu todas as perguntas. Por favor, reinicie o quiz.";
             } else {
-                statusMessage.textContent = `Você precisa acertar mais ${remainingCorrectAnswers} questões para atingir ${passingPercentage}% de acerto.`;
+                statusMessage.textContent = `Acerte ${remainingCorrectAnswers} questões e atinja ${passingPercentage}% de acerto.`;
             }
         } else {
             statusMessage.textContent = `Parabéns! Você atingiu ${passingPercentage}% de acerto.`;
