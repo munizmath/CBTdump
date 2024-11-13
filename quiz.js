@@ -49,13 +49,13 @@ document.addEventListener('DOMContentLoaded', function () {
             const inputType = Array.isArray(currentQuestion.correctAnswer) ? "checkbox" : "radio";
             const shuffledOptions = shuffleArray(Object.keys(currentQuestion.options));
 
-            const answers = shuffledOptions.map(
-                letter => `
-                    <label class="answer">
-                        <input type="${inputType}" name="question${questionNumber}" value="${letter}">
-                        ${letter}: ${currentQuestion.options[letter]}
-                    </label>`
-            ).join('');
+        const answers = shuffledOptions.map(
+            letter => `
+                <label class="answer">
+                    <input type="${inputType}" name="question${questionNumber}" value="${letter}">
+                    ${currentQuestion.options[letter]}
+                </label>`
+        ).join('');
 
             return `
                 <div class="question">
