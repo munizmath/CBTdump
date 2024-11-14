@@ -16,6 +16,7 @@ document.addEventListener('DOMContentLoaded', function () {
     let remainingTime = 30 * 60; // 30 minutos em segundos
     let timerInterval = null;
     let isPaused = false;
+    let quizStarted = false; // variável para verificar se o quiz começou
 
     // Carregar perguntas do arquivo JSON
     fetch('questions.json')
@@ -69,6 +70,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         quizContainer.innerHTML = output.join('');
+        quizStarted = true; // Definir que o quiz começou
 
         shuffledQuestions.forEach((currentQuestion, questionNumber) => {
             const answerContainer = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .answers`);
@@ -150,6 +152,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateStatusMessage() {
+        if (!quizStarted) return; // Só atualizar se o quiz tiver começado
+
         const requiredCorrectAnswers = Math.ceil((passingPercentage / 100) * currentQuestions.length);
         const remainingCorrectAnswers = requiredCorrectAnswers - correctCount;
 
@@ -241,6 +245,7 @@ document.addEventListener('DOMContentLoaded', function () {
         clearInterval(timerInterval);
         timerInterval = null;
         timerDisplay.textContent = "00:00";
+        quizStarted = false; // Reiniciar o status do quiz
 
         buildQuiz(currentQuestions);
         updateStatusMessage();
