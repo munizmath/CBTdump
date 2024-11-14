@@ -13,10 +13,10 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentQuestions = [];
     let passingPercentage = 80;
     let selectedParts = [];
-    let remainingTime = 30 * 60; // 30 minutos em segundos
+    let remainingTime = 0; // Será ajustado para 30 minutos ao selecionar 25 questões
     let timerInterval = null;
     let isPaused = false;
-    let quizStarted = false; // variável para verificar se o quiz começou
+    let quizStarted = false;
 
     // Carregar perguntas do arquivo JSON
     fetch('questions.json')
@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const inputType = Array.isArray(currentQuestion.correctAnswer) ? "checkbox" : "radio";
             const shuffledOptions = shuffleArray(Object.keys(currentQuestion.options));
 
-            // Renderizando as opções de resposta sem exibir as letras de identificação (A, B, C, D)
             const answers = shuffledOptions.map(
                 letter => `
                     <label class="answer">
@@ -70,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
 
         quizContainer.innerHTML = output.join('');
-        quizStarted = true; // Definir que o quiz começou
+        quizStarted = true;
 
         shuffledQuestions.forEach((currentQuestion, questionNumber) => {
             const answerContainer = quizContainer.querySelector(`.question:nth-child(${questionNumber + 1}) .answers`);
@@ -108,7 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                     label.style.backgroundColor = 'green';
                                 });
                                 answeredCorrectly = true;
-                                explanationElement.style.display = 'block'; // Exibir explicação
+                                explanationElement.style.display = 'block';
                             } else {
                                 selectedArray.forEach(ans => {
                                     const label = answerContainer.querySelector(`input[value="${ans}"]`).parentElement;
@@ -117,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
                                 incorrectCount++;
                                 incorrectCounter.textContent = incorrectCount;
                                 inputs.forEach(input => input.disabled = true);
-                                explanationElement.style.display = 'block'; // Exibir explicação
+                                explanationElement.style.display = 'block';
 
                                 currentQuestion.correctAnswer.forEach(correctOption => {
                                     const correctLabel = answerContainer.querySelector(`input[value="${correctOption}"]`)?.parentElement;
@@ -133,13 +132,13 @@ document.addEventListener('DOMContentLoaded', function () {
                             selectedLabel.style.backgroundColor = 'green';
                             answeredCorrectly = true;
                             inputs.forEach(input => input.disabled = true);
-                            explanationElement.style.display = 'block'; // Exibir explicação
+                            explanationElement.style.display = 'block';
                         } else {
                             selectedLabel.style.backgroundColor = 'red';
                             incorrectCount++;
                             incorrectCounter.textContent = incorrectCount;
                             inputs.forEach(input => input.disabled = true);
-                            explanationElement.style.display = 'block'; // Exibir explicação
+                            explanationElement.style.display = 'block';
 
                             const correctLabel = answerContainer.querySelector(`input[value="${currentQuestion.correctAnswer}"]`)?.parentElement;
                             if (correctLabel) correctLabel.style.backgroundColor = 'green';
@@ -152,7 +151,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateStatusMessage() {
-        if (!quizStarted) return; // Só atualizar se o quiz tiver começado
+        if (!quizStarted) return;
 
         const requiredCorrectAnswers = Math.ceil((passingPercentage / 100) * currentQuestions.length);
         const remainingCorrectAnswers = requiredCorrectAnswers - correctCount;
@@ -185,7 +184,8 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        remainingTime += 30 * 60;
+        // Ajustar o tempo para 30 minutos (1800 segundos) ao iniciar
+        remainingTime = 30 * 60;
         if (!timerInterval) {
             timerInterval = setInterval(updateTimer, 1000);
         }
@@ -194,6 +194,8 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function updateTimer() {
+        if (isPaused) return;
+
         const minutes = Math.floor(remainingTime / 60);
         const seconds = remainingTime % 60;
         timerDisplay.textContent = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
@@ -245,7 +247,7 @@ document.addEventListener('DOMContentLoaded', function () {
         clearInterval(timerInterval);
         timerInterval = null;
         timerDisplay.textContent = "00:00";
-        quizStarted = false; // Reiniciar o status do quiz
+        quizStarted = false;
 
         buildQuiz(currentQuestions);
         updateStatusMessage();
